@@ -1,4 +1,4 @@
-package dev.obrienlabs.biometric.biometricnbi;
+package dev.obrienlabs.biometric.nbi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
