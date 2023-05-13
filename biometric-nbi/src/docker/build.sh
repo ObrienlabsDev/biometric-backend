@@ -22,6 +22,8 @@ CONTAINER_IMAGE=biometric-nbi
 cp ../../target/*.jar $TARGET_DIR
 cp DockerFile $TARGET_DIR
 #cp startService.sh $TARGET_DIR
+# use following to generate credentials
+# gcloud auth application-default login 
 cp ~/.config/gcloud/application_default_credentials.json $TARGET_DIR
 
 cd $TARGET_DIR
