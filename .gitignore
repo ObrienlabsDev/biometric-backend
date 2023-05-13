@@ -1,3 +1,6 @@
+.DS_Store/
+target/
+.settings
 # Compiled class file
 *.class
 
