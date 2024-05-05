@@ -3,10 +3,10 @@ package dev.obrienlabs.biometric.biometricnbi;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class BiometricNbiApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

@@ -25,8 +25,11 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-//import javax.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletRequest;
+
+// spring boot 2.x
+import javax.servlet.http.HttpServletRequest;
+// spring boot 3+
+//import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
