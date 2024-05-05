@@ -36,8 +36,8 @@ docker push obrienlabs/$CONTAINER_IMAGE:$TAG
 
 # locally
 #CONTAINER_IMAGE2=biometric-nbi
-#docker stop $CONTAINER_IMAGE
-#docker rm $CONTAINER_IMAGE
+docker stop $CONTAINER_IMAGE
+docker rm $CONTAINER_IMAGE
 #docker stop $CONTAINER_IMAGE2
 #docker rm $CONTAINER_IMAGE2
 
@@ -62,5 +62,8 @@ cd ../../src/docker
 
 echo "export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json"
 # --network="host"
+export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
 echo "docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm"
+docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm
 echo "curl http://localhost:8888/nbi/api"
+curl http://localhost:8888/nbi/api
