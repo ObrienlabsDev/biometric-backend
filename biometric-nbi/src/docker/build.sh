@@ -66,4 +66,5 @@ export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_crede
 echo "docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm"
 docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm
 echo "curl http://localhost:8888/nbi/api"
+sleep 2
 curl http://localhost:8888/nbi/api
