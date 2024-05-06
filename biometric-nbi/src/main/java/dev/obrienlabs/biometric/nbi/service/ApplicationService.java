@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationService implements ApplicationServiceLocal {
 
+
+	@Override
+	public String getGps() {
+		return "100";
+	}
+	
 	@Override
 	public String health() {
 		return "OK";
