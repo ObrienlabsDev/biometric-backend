@@ -24,7 +24,7 @@ cp DockerFile $TARGET_DIR
 #cp startService.sh $TARGET_DIR
 # use following to generate credentials
 # gcloud auth application-default login 
-cp ~/.config/gcloud/application_default_credentials.json $TARGET_DIR
+#cp ~/.config/gcloud/application_default_credentials.json $TARGET_DIR
 
 cd $TARGET_DIR
 docker build --no-cache --build-arg build-id=$BUILD_ID -t obrienlabs/$CONTAINER_IMAGE -f DockerFile .
@@ -60,11 +60,12 @@ cd ../../src/docker
 #echo "http://127.0.0.1:8888/nbi/forward/reset"
 #echo "http://127.0.0.1:8889/nbi/forward/reset"
 
-echo "export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json"
-# --network="host"
-export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
-echo "docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm"
-docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm
-echo "curl http://localhost:8888/nbi/api"
+#echo "export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json"
+## --network="host"
+#export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
+#echo "docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm"
+docker run -d -p 8888:8080 --name biometric-nbi obrienlabs/biometric-nbi:0.0.1-arm
+echo "curl -X GET \"http://127.0.0.1:8080/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=0&up=0\" -H \"accept: */*\""
 sleep 2
-curl http://localhost:8888/nbi/api
+
+curl -X GET "http://127.0.0.1:8888/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=0&up=0" -H "accept: */*"

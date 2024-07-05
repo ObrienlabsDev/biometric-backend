@@ -57,6 +57,7 @@ public class ApiController {
     private final AtomicLong counter = new AtomicLong();
 	private static final CharSequence PASS = "PASS2";
     
+	// http://127.0.0.1:8080/nbi/swagger-ui.html#/api-controller/processUsingGET
 	@RequestMapping(method=RequestMethod.GET)
 	public @ResponseBody Api process(
 			@RequestParam(value="action", required=true, defaultValue="u2") String action2,
@@ -294,10 +295,52 @@ public class ApiController {
 
 	}
 	    
+	// curl -X GET "http://127.0.0.1:8888/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=0&up=0" -H "accept: */*"
+	
 	@GetMapping("/getGps")
 	@RequestMapping("/getGps")
-	public String getGps() {
-		return applicationService.getGps().toString();
+	public  @ResponseBody String getGps(@RequestParam(value="action", required=true, defaultValue="u2") String action2,
+			@RequestParam(value="lg", required=true, defaultValue="0") String lg,
+			@RequestParam(value="lt", required=true, defaultValue="0") String lt,
+			@RequestParam(value="ac", required=true, defaultValue="0") String ac,
+			@RequestParam(value="al", required=true, defaultValue="0") String al,
+			@RequestParam(value="ts", required=true, defaultValue="0") String ts,
+			@RequestParam(value="p", required=true, defaultValue="0") String p,
+			@RequestParam(value="te", required=true, defaultValue="0") String te,
+			@RequestParam(value="be", required=true, defaultValue="0") String be,
+			@RequestParam(value="s", required=true, defaultValue="0") String s,
+			@RequestParam(value="pr", required=true, defaultValue="0") String pr,
+			@RequestParam(value="hr1", required=true, defaultValue="0") String hr1,
+			@RequestParam(value="hr2", required=true, defaultValue="0") String hr2,
+			@RequestParam(value="hrd1", required=true, defaultValue="0") String hrd1,
+			@RequestParam(value="hrd2", required=true, defaultValue="0") String hrd2,
+			@RequestParam(value="grx", required=true, defaultValue="0") String grx,
+			@RequestParam(value="gry", required=true, defaultValue="0") String gry,
+			@RequestParam(value="grz", required=true, defaultValue="0") String grz,
+			@RequestParam(value="arx", required=true, defaultValue="0") String arx,
+			@RequestParam(value="ary", required=true, defaultValue="0") String ary,
+			@RequestParam(value="arz", required=true, defaultValue="0") String arz,
+			@RequestParam(value="gsx", required=true, defaultValue="0") String gsx,
+			@RequestParam(value="gsy", required=true, defaultValue="0") String gsy,
+			@RequestParam(value="gsz", required=true, defaultValue="0") String gsz,
+			@RequestParam(value="li", required=true, defaultValue="0") String li,
+			@RequestParam(value="lax", required=true, defaultValue="0") String lax,
+			@RequestParam(value="lay", required=true, defaultValue="0") String lay,
+			@RequestParam(value="laz", required=true, defaultValue="0") String laz,
+			@RequestParam(value="px", required=true, defaultValue="0") String px,
+			@RequestParam(value="hu", required=true, defaultValue="0") String hu,
+			@RequestParam(value="rvx", required=true, defaultValue="0") String rvx,
+			@RequestParam(value="rvy", required=true, defaultValue="0") String rvy,
+			@RequestParam(value="rvz", required=true, defaultValue="0") String rvz,
+			@RequestParam(value="mfx", required=true, defaultValue="0") String mfx,
+			@RequestParam(value="mfy", required=true, defaultValue="0") String mfy,
+			@RequestParam(value="mfz", required=true, defaultValue="0") String mfz,
+			@RequestParam(value="up", required=true, defaultValue="0") String up,	
+			@RequestParam(value="u", required=true, defaultValue="0") String user,	
+	    		 HttpServletRequest request) {
+			Record aRecord = processGpsPrivate(request);
+			
+		return applicationService.getGps(aRecord).toString();
 	}
 		
 	@GetMapping("/health")
