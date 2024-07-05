@@ -98,12 +98,13 @@ public class ApiController {
 			@RequestParam(value="up", required=true, defaultValue="0") String up,	
 			@RequestParam(value="u", required=true, defaultValue="0") String user,	
 	    		 HttpServletRequest request) {
+			Record aRecord = processGpsPrivate(request);
 	    	String message = PASS.toString();
 	    	message = message +  " remoteAddr: " +
 	        	request.getRemoteAddr() + " localAddr: " + 
 	    		request.getLocalAddr() + " remoteHost: " +
 	        	request.getRemoteHost() + " serverName: " + 
-	    		request.getServerName() + " " + processGpsPrivate(request);
+	    		request.getServerName() + " " + aRecord;
 	    	// + " requestedSessionId: " + 
 	    	//request.getRequestedSessionId() + " X-FORWARDED-FOR: " +
 			//request.getHeader("X-FORWARDED-FOR"));
