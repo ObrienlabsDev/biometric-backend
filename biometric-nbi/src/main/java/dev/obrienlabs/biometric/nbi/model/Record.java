@@ -1,38 +1,30 @@
 package dev.obrienlabs.biometric.nbi.model;
 
-/*
+
+
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-//import javax.persistence.Index;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 //import javax.persistence.UniqueConstraint;
-*/
+
 //import org.hibernate.annotations.Index;
 
 //import org.eclipse.persistence.annotations.Multitenant;
 //import org.eclipse.persistence.annotations.MultitenantType;
 //import org.eclipse.persistence.annotations.TenantDiscriminatorColumn;
 
-//@Entity
-//@Table(name="gps_record")//,indexes={@Index(name="GPS_RECORD_INDX0", columnList="userId")})
-//@Access(value = AccessType.FIELD)
-//@XmlType
-//@XmlRootElement
-//@XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Table(name="gps_record")//,indexes={@Index(name="GPS_RECORD_INDX0", columnList="userId")})
+@Access(value = AccessType.FIELD)
+@XmlType
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Record extends IdentifiableDataObject {
     
     //@Id
