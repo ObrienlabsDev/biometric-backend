@@ -60,6 +60,11 @@ cd ../../src/docker
 #echo "http://127.0.0.1:8888/nbi/forward/reset"
 #echo "http://127.0.0.1:8889/nbi/forward/reset"
 
+# mysql
+# docker run --name mysql-dev0 -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d -p 3506:3306 arm64v8/mysql:8.0.38
+ 
+
+
 #echo "export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json"
 ## --network="host"
 #export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json

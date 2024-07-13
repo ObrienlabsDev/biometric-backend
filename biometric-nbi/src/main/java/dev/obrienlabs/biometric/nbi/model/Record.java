@@ -5,10 +5,12 @@ package dev.obrienlabs.biometric.nbi.model;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 //import javax.persistence.UniqueConstraint;
@@ -18,6 +20,13 @@ import javax.xml.bind.annotation.XmlType;
 //import org.eclipse.persistence.annotations.Multitenant;
 //import org.eclipse.persistence.annotations.MultitenantType;
 //import org.eclipse.persistence.annotations.TenantDiscriminatorColumn;
+
+
+/*
+ * #select count(1) from biometric.gps_record;
+#select * from biometric.gps_record order by IDENT_ID DESC;
+select * from biometric.gps_record where userId="202407065"
+ */
 
 @Entity
 @Table(name="gps_record")//,indexes={@Index(name="GPS_RECORD_INDX0", columnList="userId")})
@@ -32,123 +41,127 @@ public class Record extends IdentifiableDataObject {
     
 
 
-   //@XmlElement
-    //@Column(name="userId", nullable=false)
+    @XmlElement
+    @Column(name="userId", nullable=false)
     private Long userId;
     
     private String geohash;
     
     // sequence # of the record on the receiving end
-    //@Column(name="RECV_SEQ")
-    //@XmlElement
+    @Column(name="RECV_SEQ")
+    @XmlElement
     private Long recvSeq;
 
     // sequence # of the record on the sending end
-    //@Column(name="SEND_SEQ")
-    //@XmlElement
+    @Column(name="SEND_SEQ")
+    @XmlElement
     private Long sendSeq;
 
     // override NUMBER(19,4) default
-    //@Column(name="LONGITUDE",columnDefinition="DECIMAL(19,10)")
-    //@XmlElement 
+    @Column(name="LONGITUDE",columnDefinition="DECIMAL(19,10)")
+    @XmlElement 
     private Double longitude;
     
-    //@Column(name="LATITUDE", columnDefinition="DECIMAL(19,10)")
-    //@XmlElement 
+    @Column(name="LATITUDE", columnDefinition="DECIMAL(19,10)")
+    @XmlElement 
     private Double lattitude;
-    //@XmlElement 
+
+    // 20240713: https://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotation-ignored
+    //@Column(name="ts_start")
+    @XmlElement 
     private Long tsStart;
-    //@XmlElement 
+    @XmlElement 
     private Long  tsStop;
     
-    //@Column(name="ACCURACY", columnDefinition="DECIMAL(19,10)") // derby DOUBLE
-    //@XmlElement 
+    @Column(name="ACCURACY", columnDefinition="DECIMAL(19,10)") // derby DOUBLE
+    @XmlElement 
     private Double accuracy;
-    //@XmlElement 
+    @XmlElement 
     private Integer bearing;
-    //@Column(name="ALTITUDE", columnDefinition="DECIMAL(19,10)",nullable=true)
-    //@XmlElement 
+    @Column(name="ALTITUDE", columnDefinition="DECIMAL(19,10)",nullable=true)
+    @XmlElement 
     private Double altitude;
-    //@XmlElement 
+    @XmlElement 
     private Double temp;
-    //@Column(name="PRES")
-    //@XmlElement 
+    @Column(name="PRES")
+    @XmlElement 
     private Double pressure;
-    //@XmlElement 
+    @XmlElement 
     private String teslaX;
-    //@XmlElement 
+    @XmlElement 
     private String teslaY;
-    //@XmlElement 
+    @XmlElement 
     private String teslaZ;
-    //@XmlElement 
+    @XmlElement 
     private Double speed;
-    //@XmlElement 
+    @XmlElement 
     private String provider;
-    //@Column(name="HRDEV1")
-    //@XmlElement 
+    @Column(name="HRDEV1")
+    @XmlElement 
     private String heartRateDevice1;
-    //@Column(name="HRDEV2")
-    //@XmlElement 
+    @Column(name="HRDEV2")
+    @XmlElement 
     private String heartRateDevice2;
-    //@Column(name="HEART1")
-    //@XmlElement 
+    @Column(name="HEART1")
+    @XmlElement 
     private Integer heartRate1;
-    //@Column(name="HEART2")
-    //@XmlElement 
+    @Column(name="HEART2")
+    @XmlElement 
     private Integer heartRate2;
-    //@Column(name="GRAVX")
-    //@XmlElement 
+    @Column(name="GRAVX")
+    @XmlElement 
     private String gravityX;
-    //@Column(name="GRAVY")
-    //@XmlElement 
+    @Column(name="GRAVY")
+    @XmlElement 
     private String gravityY;
-    //@Column(name="GRAVZ")
-    //@XmlElement 
+    @Column(name="GRAVZ")
+    @XmlElement 
     private String gravityZ;
-    //@Column(name="ACCELX")
-    //@XmlElement 
+    @Column(name="ACCELX")
+    @XmlElement 
     private String accelerometerX;
-    //@Column(name="ACCELY")
-    //@XmlElement 
+    @Column(name="ACCELY")
+    @XmlElement 
     private String accelerometerY;
-    //@Column(name="ACCELZ")
-    //@XmlElement 
+    @Column(name="ACCELZ")
+    @XmlElement 
     private String accelerometerZ;
-    //@Column(name="GYROX")
-    //@XmlElement 
+    @Column(name="GYROX")
+    @XmlElement 
     private String gyroscopeX;
-    //@Column(name="GYROY")
-    //@XmlElement 
+    @Column(name="GYROY")
+    @XmlElement 
     private String gyroscopeY;
-    //@Column(name="GYROZ")
-    //@XmlElement 
+    @Column(name="GYROZ")
+    @XmlElement 
     private String gyroscopeZ;
     // 20160117: BIOM-N
+    // 20240713 match lc db
     //@Column(name="LIGHT")
-    //@XmlElement 
+    @XmlElement 
     private String light;
-    //@Column(name="LINACCX")
-    //@XmlElement 
+    @Column(name="LINACCX")
+    @XmlElement 
     private String linearAccelerationX;
-    //@Column(name="LINACCY")
-    //@XmlElement 
+    @Column(name="LINACCY")
+    @XmlElement 
     private String linearAccelerationY;
-    //@Column(name="LINACCZ")
-    //@XmlElement 
+    @Column(name="LINACCZ")
+    @XmlElement 
     private String linearAccelerationZ;
-    //@Column(name="PROX")
-    //@XmlElement 
+    @Column(name="PROX")
+    @XmlElement 
     private String proximity;
-    //@XmlElement 
+    @XmlElement 
     private String humidity;
-    //@Column(name="ROTVECX")
-    //@XmlElement 
+    @Column(name="ROTVECX")
+    @XmlElement 
     private String rotationVectorX;
-    //@Column(name="ROTVECY")
-    //@XmlElement 
+    @Column(name="ROTVECY")
+    @XmlElement 
     private String rotationVectorY;
-    //@Column(name="ROTVECZ")
-    //@XmlElement 
+    @Column(name="ROTVECZ")
+    @XmlElement 
     private String rotationVectorZ;
 
 	public String getHeartRateDevice1() {

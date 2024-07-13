@@ -1,12 +1,20 @@
 package dev.obrienlabs.biometric.nbi.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import dev.obrienlabs.biometric.nbi.model.Record;
+import dev.obrienlabs.biometric.repository.RecordRepository;
+import dev.obrienlabs.biometric.repository.RecordRepositoryImpl;
 
 @Service
 public class ApplicationService implements ApplicationServiceLocal {
 
+	@Autowired
+	// add following to the Application class @EnableJpaRepositories("dev.obrienlabs.biometric.repository")
+	private RecordRepositoryImpl recordRepository;
+	
 
 	@Override
 	public String getGps(Record aRecord
@@ -50,6 +58,10 @@ public class ApplicationService implements ApplicationServiceLocal {
 			String user	*/
 
 			) {
+		
+		// persist - id is auto generatedc
+		//recordRepository.save(aRecord, null);
+		recordRepository.persist(aRecord);
 		return aRecord.toString();
 	}
 	
