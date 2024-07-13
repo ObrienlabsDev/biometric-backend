@@ -155,14 +155,32 @@ public class SwaggerConfig {
 }
 ```
 ### Spring Data JPA
+- see https://github.com/ObrienlabsDev/biometric-backend/issues/3
 pom.xml
 ```
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+```
+
+Repositories
+```
+package dev.obrienlabs.biometric.repository;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RecordRepository extends CrudRepository<Record, Long> {
+	Record findById(long id);
+}
 
 ```
+JPA Entities
+
 #### References
 - https://spring.io/guides/gs/accessing-data-jpa
 
