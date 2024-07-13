@@ -155,6 +155,17 @@ public class SwaggerConfig {
 }
 ```
 ### Spring Data JPA
+pom.xml
+```
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+```
+#### References
+- https://spring.io/guides/gs/accessing-data-jpa
+
 ### MySQL Database Backend
 ### Lombok
 ### Kafka
