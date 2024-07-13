@@ -22,12 +22,10 @@ public class RecordRepositoryImpl {// implements RecordRepository {
 	  @PersistenceContext
 	  private EntityManager entityManager;
 
-	//Record findById(long id);
+	  //Record findById(long id);
 	  //@Override
 	  @Transactional
 	  public void persist(Record record) {
 		  entityManager.persist(record);
 	  }
-
-
 }
