@@ -28,4 +28,7 @@ public class RecordRepositoryImpl {// implements RecordRepository {
 	  public void persist(Record record) {
 		  entityManager.persist(record);
 	  }
+
 }
+
+
