@@ -169,7 +169,7 @@ public class ApiController {
 
 			Record aRecord = new Record();
 			if (null != ts && !ts.isEmpty()) {
-				aRecord.setTsStart(new Long(ts));
+				aRecord.setTsStart(Long.valueOf(ts));
 			}
 			aRecord.setTsStop(System.currentTimeMillis());
 			if (null != lt && !lt.isEmpty()) {

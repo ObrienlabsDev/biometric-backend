@@ -1,4 +1,3 @@
-#FROM anapsix/alpine-java:jre8
 FROM openjdk:17
 
 ARG USERVICE_HOME=/opt/app/
@@ -7,10 +6,8 @@ ARG USERVICE_HOME=/opt/app/
 RUN mkdir -p $USERVICE_HOME
 
 ADD biometric-nbi-*.jar $USERVICE_HOME/ROOT.jar
-ADD application_default_credentials.json application_default_credentials.json
-#ADD startService.sh $USERVICE_HOME/bin/
+#ADD application_default_credentials.json application_default_credentials.json
 
-ARG GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json
+#ARG GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/app/ROOT.jar"]
 
-#CMD ["/opt/app/bin/startService.sh"]

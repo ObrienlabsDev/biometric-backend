@@ -47,7 +47,7 @@ docker rm $CONTAINER_IMAGE
 #    -e os.environment.configuration.dir=/ \
 #    -e os.environment.ecosystem=sbx \
 #    obrienlabs/$CONTAINER_IMAGE:$TAG
-#docker run --name $CONTAINER_IMAGE2 \
+##docker run --name $CONTAINER_IMAGE2 \
 #    -d -p 8889:8080 \
 #    -e os.environment.configuration.dir=/ \
 #    -e os.environment.ecosystem=sbx \
