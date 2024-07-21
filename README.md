@@ -284,6 +284,9 @@ http://127.0.0.1:8080/nbi/swagger-ui.html#/api-controller/getGpsUsingGET
 2024-07-13 18:32:15.081 DEBUG 95337 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
 
 select * from biometric.gps_record where userId="202407130"
+'15458114','0','0','0','0.0000000000','0.0000000000','0',NULL,'0','0','0','0','0','0','0','0','0','0','0','0.0000000000','0','0','0','0','0.0000000000','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1720909791966','202407130','0'
+
+Insert again
 
 
 ```
@@ -307,6 +310,10 @@ cp ~/.config/gcloud/application_default_credentials.json $TARGET_DIR
 
 
 ## Deployment
+
+```
+
+```
 
 ## Debugging
 
