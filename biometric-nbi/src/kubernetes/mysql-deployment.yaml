@@ -25,7 +25,8 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql:5.7
+      # https://github.com/ObrienlabsDev/blog/wiki/Developer-Guide#mysql-on-docker
+      - image: mysql:8.0.38
         name: mysql
         env:
           # Use secret in real usage
