@@ -55,7 +55,7 @@ public class ApiController {
 	ApplicationServiceLocal applicationService;
 
     private final AtomicLong counter = new AtomicLong();
-	private static final CharSequence PASS = "PASS2";
+	private static final CharSequence PASS = "OK";
     
 	// http://127.0.0.1:8080/nbi/swagger-ui.html#/api-controller/processUsingGET
 	@RequestMapping(method=RequestMethod.GET)
@@ -101,11 +101,14 @@ public class ApiController {
 	    		 HttpServletRequest request) {
 			Record aRecord = processGpsPrivate(request);
 	    	String message = PASS.toString();
-	    	message = message +  " remoteAddr: " +
-	        	request.getRemoteAddr() + " localAddr: " + 
-	    		request.getLocalAddr() + " remoteHost: " +
-	        	request.getRemoteHost() + " serverName: " + 
-	    		request.getServerName() + " " + aRecord;
+
+		message = message + ":" + "0" + ":" + aRecord);// xmlBuffer.toString());
+                //message = message +  " remoteAddr: " +
+                //      request.getRemoteAddr() + " localAddr: " + 
+                //      request.getLocalAddr() + " remoteHost: " +
+                //      request.getRemoteHost() + " serverName: " + 
+                //      request.getServerName() + " " + aRecord;
+
 	    	// + " requestedSessionId: " + 
 	    	//request.getRequestedSessionId() + " X-FORWARDED-FOR: " +
 			//request.getHeader("X-FORWARDED-FOR"));
@@ -115,7 +118,9 @@ public class ApiController {
 	     	System.out.println(api);
 	     	// return
 	     	// data: 126: OK:f21czytg7206:Record(null,20240505,18,1662449,null,null,45.343881,-75.94045,292,104.69228,1714950768577,1714950768598,null)
-	    	return api;
+	    	// need
+		// OK:....
+		return api;
 	    } 
 	
 	
