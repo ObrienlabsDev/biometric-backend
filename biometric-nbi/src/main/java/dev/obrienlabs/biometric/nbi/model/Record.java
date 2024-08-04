@@ -437,7 +437,7 @@ public class Record extends IdentifiableDataObject {
     	buffer.append(this.getBearing());
     	buffer.append(",alt=");
     	buffer.append(this.getAltitude());
-    	buffer.append(",tst");
+    	buffer.append(",tst=");
     	buffer.append(this.getTsStart());
     	buffer.append(",tsp=");
        	buffer.append(this.getTsStop());
