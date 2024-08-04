@@ -15,9 +15,10 @@ TARGET_DIR=../../$BUILD_DIR/$BUILD_ID
 mkdir $TARGET_DIR
 CONTAINER_IMAGE=biometric-nbi
 
-#cd ../../
-#mvn clean install -U -DskipTests=true
-#cd src/docker
+# take the hit - as I forgot twice to rebuild - just ENV the parameters into spring boot
+cd ../../
+mvn clean install -U -DskipTests=true
+cd src/docker
 
 cp ../../target/*.jar $TARGET_DIR
 cp DockerFile $TARGET_DIR
@@ -61,7 +62,8 @@ cd ../../src/docker
 #echo "http://127.0.0.1:8889/nbi/forward/reset"
 
 # mysql
-# docker run --name mysql-dev0 -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d -p 3506:3306 arm64v8/mysql:8.0.38
+# docker network create --driver=bridge mysql
+# docker run --network="mysql" --name mysql-dev0 -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d -p 3506:3306 arm64v8/mysql:8.0.38
  
 
 
@@ -69,8 +71,9 @@ cd ../../src/docker
 ## --network="host"
 #export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
 #echo "docker run -d -p 8888:8080 --name biometric-nbi -e GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json obrienlabs/biometric-nbi:0.0.1-arm"
-docker run -d -p 8888:8080 --name biometric-nbi obrienlabs/biometric-nbi:0.0.1-arm
-echo "curl -X GET \"http://127.0.0.1:8080/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=0&up=0\" -H \"accept: */*\""
-sleep 2
-
-curl -X GET "http://127.0.0.1:8888/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=0&up=0" -H "accept: */*"
+docker run -d -p 8888:8080 --name biometric-nbi obrienlabs/$CONTAINER_IMAGE:$TAG
+echo "curl -X GET \"http://192.168.0.105:8888/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=202408040&up=0\" -H \"accept: */*\""
+echo "sleep 10 then check containers"
+sleep 10
+docker ps
+curl -X GET "http://192.168.0.105:8888/nbi/api/getGps?ac=0&action=u2&al=0&arx=0&ary=0&arz=0&be=0&grx=0&gry=0&grz=0&gsx=0&gsy=0&gsz=0&hr1=0&hr2=0&hrd1=0&hrd2=0&hu=0&lax=0&lay=0&laz=0&lg=0&li=0&lt=0&mfx=0&mfy=0&mfz=0&p=0&pr=0&px=0&rvx=0&rvy=0&rvz=0&s=0&te=0&ts=0&u=202408040&up=0" -H "accept: */*"
