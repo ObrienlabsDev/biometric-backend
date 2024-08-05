@@ -5,6 +5,9 @@ target/
 # Compiled class file
 *.class
 
+.classpath
+.project
+biometric-nbi/.classpath
 # Log file
 *.log
 
