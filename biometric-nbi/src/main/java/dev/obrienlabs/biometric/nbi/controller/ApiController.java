@@ -102,7 +102,7 @@ public class ApiController {
 			Record aRecord = processGpsPrivate(request);
 	    	String message = PASS.toString();
 
-		message = message + ":" + "0" + ":" + aRecord);// xmlBuffer.toString());
+		message = message + ":" + "0" + ":" + aRecord;// xmlBuffer.toString());
                 //message = message +  " remoteAddr: " +
                 //      request.getRemoteAddr() + " localAddr: " + 
                 //      request.getLocalAddr() + " remoteHost: " +
