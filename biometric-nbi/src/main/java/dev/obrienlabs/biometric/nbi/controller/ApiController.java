@@ -56,7 +56,7 @@ public class ApiController {
 	ApplicationServiceLocal applicationService;
 
     private final AtomicLong counter = new AtomicLong();
-	private static final CharSequence PASS = "OK";
+	private static final CharSequence PASS = ""; // OK
     
 	// http://127.0.0.1:8080/nbi/swagger-ui.html#/api-controller/processUsingGET
 	@RequestMapping(method=RequestMethod.GET)
@@ -103,7 +103,7 @@ public class ApiController {
 			Record aRecord = processGpsPrivate(request);
 	    	String message = PASS.toString();
 
-		message = message + ":" + "0" + ":" + aRecord;// xmlBuffer.toString());
+		message = message + ":" + aRecord.getGeohash() + ":" + aRecord;// xmlBuffer.toString());
                 //message = message +  " remoteAddr: " +
                 //      request.getRemoteAddr() + " localAddr: " + 
                 //      request.getLocalAddr() + " remoteHost: " +
@@ -116,7 +116,8 @@ public class ApiController {
 	     	Api api = new Api(counter.incrementAndGet(), message);
 	     	
 	     	LOG.info(api.toString());
-	     	System.out.println(api);
+	     	// used by RE in BMViewController.m
+	     	LOG.info("message: " + message);
 	     	// return
 	     	// data: 126: OK:f21czytg7206:Record(null,20240505,18,1662449,null,null,45.343881,-75.94045,292,104.69228,1714950768577,1714950768598,null)
 	    	// need

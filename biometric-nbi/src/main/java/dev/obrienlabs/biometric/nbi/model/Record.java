@@ -416,6 +416,41 @@ public class Record extends IdentifiableDataObject {
 	@Override
     public String toString() {
     	StringBuffer buffer = new StringBuffer();
+    	buffer.append("OK:" + this.getGeohash() + ":");
+    	buffer.append(this.getClass().getSimpleName());
+    	buffer.append("(");
+    	buffer.append(this.getId());
+    	buffer.append(",");
+    	buffer.append(this.getUserId());
+    	buffer.append(",");
+    	buffer.append(this.getSendSeq());
+    	buffer.append(",");
+    	buffer.append(this.getRecvSeq());
+    	buffer.append(",");
+    	buffer.append(this.getHeartRate1());
+    	buffer.append(",");
+    	buffer.append(this.getHeartRate2());
+    	buffer.append(",");
+    	buffer.append(this.getLattitude());
+    	buffer.append(",");
+    	buffer.append(this.getLongitude());
+    	buffer.append(",");
+    	buffer.append(this.getBearing());
+    	buffer.append(",");
+    	buffer.append(this.getAltitude());
+    	buffer.append(",");
+    	buffer.append(this.getTsStart());
+    	buffer.append(",");
+    	buffer.append(this.getTsStop());
+    	buffer.append(",");
+    	buffer.append(this.getPressure());
+    	buffer.append(")");
+    	return buffer.toString();
+    }
+	
+    public String toStringFull() {
+    	StringBuffer buffer = new StringBuffer();
+    	buffer.append("OK:" + this.getGeohash() + ":");
     	buffer.append(this.getClass().getSimpleName());
     	buffer.append("(id=");
     	buffer.append(this.getId());
