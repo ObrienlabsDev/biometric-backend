@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import dev.obrienlabs.biometric.nbi.model.Record;
 import dev.obrienlabs.biometric.repository.RecordRepository;
 import dev.obrienlabs.biometric.repository.RecordRepositoryImpl;
@@ -15,7 +18,13 @@ public class ApplicationService implements ApplicationServiceLocal {
 	// add following to the Application class @EnableJpaRepositories("dev.obrienlabs.biometric.repository")
 	private RecordRepositoryImpl recordRepository;
 	
-
+	private static final GeoHash _geohash = new GeoHash();
+	
+	@Transactional(propagation = Propagation.NEVER)
+	public String geohash(double lat, double lon) {
+		return _geohash.encode(lat, lon);
+	}
+	
 	@Override
 	public String getGps(Record aRecord
 /*			String action2,

@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import dev.obrienlabs.biometric.nbi.model.Api;
 import dev.obrienlabs.biometric.nbi.model.Record;
 import dev.obrienlabs.biometric.nbi.service.ApplicationServiceLocal;
+import dev.obrienlabs.biometric.nbi.service.GeoHash;
 
 // change to RestController
 @Controller
@@ -288,9 +289,9 @@ public class ApiController {
 
 			aRecord.setRecvSeq(counter.get());//nextReadingSequenceId.addAndGet(1));
 
-			//String geohash = service.geohash(new Double(lt), new Double(lg));
-			//System.out.println(geohash);
-			//aRecord.setGeohash(geohash);
+			String geohash = applicationService.geohash(Double.valueOf(lt), Double.valueOf(lg));
+			System.out.println(geohash);
+			aRecord.setGeohash(geohash);
 			//String status = service.persist(aRecord);
 			//out.println(status + ":" + geohash + ":" + aRecord);// xmlBuffer.toString());
 			
