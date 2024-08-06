@@ -4,6 +4,9 @@ Biometric Backend
 - see https://github.com/ObrienlabsDev/doppler-radar-ml/issues
 
 ## Architecture
+### Deployment
+#### Kubernetes Cluster
+- https://github.com/ObrienlabsDev/biometric-backend/issues/11
 ### Spring Boot
 Add pom.xml
 ```
