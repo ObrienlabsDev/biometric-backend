@@ -233,7 +233,7 @@ public class Record extends IdentifiableDataObject {
 }
 ```
 
-For the problem where the column names were auto converting from tsStart to ts_start - gemini was no help - stackoverflow as usually was.
+For the problem where the column names were auto converting from tsStart to ts_start.
 https://stackoverflow.com/questions/25283198/spring-boot-jpa-column-name-annotation-ignored
 
 ```
