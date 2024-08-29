@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: mysql
 spec:
+  # kubectl port-forward mysql-58b7767464-dgpf4 3306:3306
   ports:
   - protocol: TCP
     port: 3306

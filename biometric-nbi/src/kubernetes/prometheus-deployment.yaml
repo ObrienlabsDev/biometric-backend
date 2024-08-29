@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus-deploy
+  namespace: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
+      containers:
+        - name: prometheus-container
+          image: prom/prometheus:latest
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config-file
+              mountPath: /etc/prometheus
+            - name: prometheus-data-storage
+              mountPath: /prometheus
+      volumes:
+        - name: prometheus-config-file
+          configMap:
+            name: prometheus-configmap
+        - name: prometheus-data-storage
+          persistentVolumeClaim:
+            claimName: prometheus-data-pvc
