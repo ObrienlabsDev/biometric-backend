@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -378,10 +379,12 @@ public class ApiController {
         return record;
     }
     
-	@GetMapping("/latest")
-	@RequestMapping("/latest")
-    public @ResponseBody String latest(HttpServletRequest request) {
-        String user = request.getParameter("u");        
+	@GetMapping(value = "/latest", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/latest", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String latest(
+    		@RequestParam(value="user", required=true, defaultValue="") String user,
+    		HttpServletRequest request) {
+        //String user = request.getParameter("u");        
         StringBuffer xmlBuffer = new StringBuffer();
         Record record = getLatestRecordPrivate(user);
         	xmlBuffer.append("{ \"tsStop\" : ").append(record.getTsStop()).append(",");
@@ -393,17 +396,20 @@ public class ApiController {
         	xmlBuffer.append(" \"longitude\" : ").append(record.getLongitude()).append(",");
         	xmlBuffer.append(" \"lattitude\" : ").append(record.getLattitude()).append("");
         	xmlBuffer.append("}");
+        	LOG.info(xmlBuffer.toString());
         return xmlBuffer.toString(); 
     }
 		
-	@GetMapping("/activeId")
-	@RequestMapping("/activeId")
+	@GetMapping(value = "/activeId", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/activeId", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String activeId(HttpServletRequest request) {
         String user = request.getParameter("u");        
         StringBuffer xmlBuffer = new StringBuffer();
         // check local cache first
         String activeId = applicationService.activeId();//null;
-        xmlBuffer.append("{ \"id\" : ").append(activeId).append("}");
+        // Issue with retrieving id in js all of a sudden - avoiding json for now
+        xmlBuffer.append("{\"id\" : ").append(activeId).append(" }");
+        //xmlBuffer.append(activeId);
         return xmlBuffer.toString(); 
     }
 	

@@ -117,13 +117,16 @@
     }
     
     //alert(document.getElementById("ident").value);
-    aURL = "rest/read/json/latest/" + document.getElementById("ident").value;
+    //aURL = "rest/read/json/latest/" + document.getElementById("ident").value;
+    aURL = "api/latest?user=" + document.getElementById("ident").value;
     //aURL = "FrontController?action=latest&u=" + document.getElementById("ident").value;
      //ajax[cell].call(url,htmlDOMelementId);
      
      $.ajax({
     	 url: aURL,
     	 success: function(result) {
+            console.log(result);
+            //{ "tsStop" : 1728163954905, "tsStart" : 1728163954845, "sendSeq" : 10, "recvSeq" : 1, "heartRate1" : null, "heartRate2" : null, "longitude" : -122.406417, "lattitude" : 37.785834}
         hr1 = result.heartRate1;
         hr2 = result.heartRate2;
       $("#div1").html("r:" + result.sendSeq + ",s:" + result.recvSeq + ",hr1:" + hr1 + ",hr2:" + hr2
@@ -270,13 +273,16 @@
         context.fillStyle = "rgb(255,255,255)";
         context.fillRect(0, 0, width * pixelSize, height * pixelSize);
         
-        aURL = "FrontController?action=activeid";
+        //aURL = "FrontController?action=activeid";
+        aURL = "api/activeId";
         //ajax[cell].call(url,htmlDOMelementId);
         document.getElementById("ident").innerHTML='searching...';
         $.ajax({
         	url:aURL,
         	success:function(result) {
         	document.getElementById("ident").value=result.id;
+        	console.log(result); //{ "id" : "20241005" }
+            console.log(result.id); //undefined if , produces = MediaType.APPLICATION_JSON_VALUE not set in spring boot api
          //$("#ident").html("r:" + result.sendSeq + ",s:" + result.recvSeq + ",hr1:" + hr1 + ",hr2:" + hr2
          //+ "," + result.lattitude + "," + result.longitude + "," + (result.tsStop - result.tsStart) + "");
          
