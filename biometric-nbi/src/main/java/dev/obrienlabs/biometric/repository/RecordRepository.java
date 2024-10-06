@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import dev.obrienlabs.biometric.nbi.model.Record;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 //public interface RecordRepository extends CrudRepository<Record, Long> {
 //@Repository
 public interface RecordRepository extends JpaRepository<Record, Long>{
@@ -15,4 +17,6 @@ public interface RecordRepository extends JpaRepository<Record, Long>{
 	  public void persist(Record record);
 	  
 	  public List<Record> findAllByUserId(Long userId);
+	  
+	  public EntityManager getEntityManager();
 }

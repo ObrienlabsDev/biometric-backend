@@ -13,6 +13,7 @@
 // limitations under the License.
 package dev.obrienlabs.biometric.nbi.controller;
 
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 // spring boot 3+
 //import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import dev.obrienlabs.biometric.nbi.model.Api;
 import dev.obrienlabs.biometric.nbi.model.Record;
 import dev.obrienlabs.biometric.nbi.service.ApplicationServiceLocal;
-import dev.obrienlabs.biometric.nbi.service.GeoHash;
 
 // change to RestController
 @Controller
@@ -54,9 +55,26 @@ public class ApiController {
 	
 	@Autowired
 	ApplicationServiceLocal applicationService;
+	
+
+	
+    private static AtomicLong nextSessionId = new AtomicLong(1);
+    //private Map<Long, AtomicLong> lastTimestampMap = new ConcurrentHashMap<>();
+    //private Map<Long, AtomicLong> nextReadingSequenceIdMap = new ConcurrentHashMap<>();
+    private static AtomicLong nextReadingSequenceId = new AtomicLong(1);
 
     private final AtomicLong counter = new AtomicLong();
 	private static final CharSequence PASS = ""; // OK
+	
+    public static final Record fakeRecord;
+    static {
+    	fakeRecord = new Record();
+    	fakeRecord.setHeartRate1(0);
+    	fakeRecord.setHeartRate2(0);
+    	fakeRecord.setLongitude(0.0);
+    	fakeRecord.setLattitude(0.0);
+    	fakeRecord.setSendSeq(100L);
+    }
     
 	// http://127.0.0.1:8080/nbi/swagger-ui.html#/api-controller/processUsingGET
 	@RequestMapping(method=RequestMethod.GET)
@@ -306,7 +324,7 @@ public class ApiController {
 	
 	@GetMapping("/getGps")
 	@RequestMapping("/getGps")
-	public  @ResponseBody String getGps(@RequestParam(value="action", required=true, defaultValue="u2") String action2,
+	public @ResponseBody String getGps(@RequestParam(value="action", required=true, defaultValue="u2") String action2,
 			@RequestParam(value="lg", required=true, defaultValue="0") String lg,
 			@RequestParam(value="lt", required=true, defaultValue="0") String lt,
 			@RequestParam(value="ac", required=true, defaultValue="0") String ac,
@@ -349,7 +367,46 @@ public class ApiController {
 			
 		return applicationService.getGps(aRecord).toString();
 	}
+	
+	
+    private Record getLatestRecordPrivate(String user) {
+    	Record record = applicationService.latest(user);//null;
+        // send fake record;
+        if(record == null ) {
+        	record = fakeRecord;
+        }	
+        return record;
+    }
+    
+	@GetMapping("/latest")
+	@RequestMapping("/latest")
+    public @ResponseBody String latest(HttpServletRequest request) {
+        String user = request.getParameter("u");        
+        StringBuffer xmlBuffer = new StringBuffer();
+        Record record = getLatestRecordPrivate(user);
+        	xmlBuffer.append("{ \"tsStop\" : ").append(record.getTsStop()).append(",");
+        	xmlBuffer.append(" \"tsStart\" : ").append(record.getTsStart()).append(",");
+        	xmlBuffer.append(" \"sendSeq\" : ").append(record.getSendSeq()).append(",");
+        	xmlBuffer.append(" \"recvSeq\" : ").append(record.getRecvSeq()).append(",");
+        	xmlBuffer.append(" \"heartRate1\" : ").append(record.getHeartRate1()).append(",");
+        	xmlBuffer.append(" \"heartRate2\" : ").append(record.getHeartRate2()).append(",");
+        	xmlBuffer.append(" \"longitude\" : ").append(record.getLongitude()).append(",");
+        	xmlBuffer.append(" \"lattitude\" : ").append(record.getLattitude()).append("");
+        	xmlBuffer.append("}");
+        return xmlBuffer.toString(); 
+    }
 		
+	@GetMapping("/activeId")
+	@RequestMapping("/activeId")
+    public @ResponseBody String activeId(HttpServletRequest request) {
+        String user = request.getParameter("u");        
+        StringBuffer xmlBuffer = new StringBuffer();
+        // check local cache first
+        String activeId = applicationService.activeId();//null;
+        xmlBuffer.append("{ \"id\" : ").append(activeId).append("}");
+        return xmlBuffer.toString(); 
+    }
+	
 	@GetMapping("/health")
 	@RequestMapping("/health")
 	public String getHealth() {

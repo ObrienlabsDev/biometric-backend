@@ -7,5 +7,8 @@ public interface ApplicationServiceLocal {
 	String health();
 	String forward();
 	String geohash(double lat, double lon);
+	Record latest(String user);
+	Record latest();
+	String activeId();
 }
 	
