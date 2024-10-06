@@ -407,7 +407,7 @@ public class ApiController {
         StringBuffer xmlBuffer = new StringBuffer();
         // check local cache first
         String activeId = applicationService.activeId();//null;
-        // Issue with retrieving id in js all of a sudden - avoiding json for now
+        // make sure the content type is application/json on the response header
         xmlBuffer.append("{\"id\" : ").append(activeId).append(" }");
         //xmlBuffer.append(activeId);
         return xmlBuffer.toString(); 
