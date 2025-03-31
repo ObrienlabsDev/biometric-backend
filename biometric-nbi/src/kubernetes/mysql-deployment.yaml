@@ -1,21 +1,8 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-spec:
-  # kubectl port-forward mysql-58b7767464-dgpf4 3306:3306
-  ports:
-  - protocol: TCP
-    port: 3306
-    targetPort: 3306
-  selector:
-    app: mysql
-  clusterIP: None
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: mysql
 spec:
   selector:
     matchLabels:
@@ -34,14 +21,18 @@ spec:
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
-          value: root
+          #value: root
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
         ports:
         - containerPort: 3306
           name: mysql
-        #volumeMounts:
-        #- name: mysql-persistent-storage
-        #  mountPath: /var/lib/mysql
-      #volumes:
-      #- name: mysql-persistent-storage
-      #  persistentVolumeClaim:
-      #    claimName: mysql-pv-claim
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
