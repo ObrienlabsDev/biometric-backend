@@ -5,6 +5,60 @@ Biometric Backend
 
 ## Architecture
 ### Deployment
+#### Docker Desktop
+- see https://github.com/ObrienlabsDev/biometric-backend/issues/6
+##### Create network
+```
+# create network
+docker network create --driver=bridge mysql
+3f194fa29ef5d8808ef0cbc41406e0c6a37bc0866be864b26ba38244de8ed0ef
+
+# list network
+ubuntu@mini5:~$ docker network list | grep mysql
+3f194fa29ef5   mysql     bridge    local
+
+```
+##### Create persistent volume
+```
+# create volume
+
+# list existing volume
+
+```
+##### Deploy MySQL
+```
+# create container
+
+
+# restart container
+ubuntu@mini5:~/obrienlabsdev/biometric-backend$ docker start mysql-dev0
+mysql-dev0
+ubuntu@mini5:~/obrienlabsdev/biometric-backend$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS         PORTS                                                  NAMES
+35b726a994a5   mysql:8.0.38   "docker-entrypoint.s…"   7 months ago   Up 4 seconds   33060/tcp, 0.0.0.0:3506->3306/tcp, :::3506->3306/tcp   mysql-dev0
+```
+##### Deploy Spring Boot REST JPA Application
+```
+# create container
+
+# restart container
+ubuntu@mini5:~/obrienlabsdev/biometric-backend$ docker start biometric-nbi
+biometric-nbi
+ubuntu@mini5:~/obrienlabsdev/biometric-backend$ docker ps
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED        STATUS         PORTS                                                  NAMES
+5329c8017261   obrienlabs/biometric-nbi:0.0.2-ia64   "java -Djava.securit…"   5 months ago   Up 3 seconds   0.0.0.0:8888->8080/tcp, :::8888->8080/tcp              biometric-nbi
+35b726a994a5   mysql:8.0.38                          "docker-entrypoint.s…"   7 months ago   Up 2 minutes   33060/tcp, 0.0.0.0:3506->3306/tcp, :::3506->3306/tcp   mysql-dev0
+```
+
+##### Verify API is visible from outside
+```
+2025-03-30 17:35:49.067 DEBUG 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/nbi/api/getGps?&u=20250330&de=iph10&pr=18.299999&lg=-75.940366&lt=45.343882&al=105.475247&ac=15.579314&be=136&s=-1.000000&grx=0.000000&gry=0.000000&grz=0.000000&arx=0.083786&ary=-0.241714&arz=-0.847626&lax=0.083786&lay=-0.241714&laz=-0.847626&rvx=-0.187668&rvy=0.254351&rvz=0.077352&ts=1743356148869&mfx=-45.306244&mfy=-65.799034&mfz=-21.953857&up=5", parameters={masked}
+2025-03-30 17:35:49.069 DEBUG 1 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to dev.obrienlabs.biometric.nbi.controller.ApiController#getGps(String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, HttpServletRequest)
+f21czytgm0qb
+2025-03-30 17:35:49.118 DEBUG 1 --- [nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'text/plain', given [*/*] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2025-03-30 17:35:49.118 DEBUG 1 --- [nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing ["OK:f21czytgm0qb:Record(15778365,20250330,5,0,null,null,45.343882,-75.940366,136,105.475247,174335614 (truncated)..."]
+2025-03-30 17:35:49.119 DEBUG 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+```
 #### Kubernetes Cluster
 - https://github.com/ObrienlabsDev/biometric-backend/issues/11
 ### Spring Boot
