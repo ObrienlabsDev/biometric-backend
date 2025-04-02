@@ -28,7 +28,7 @@ ubuntu@mini5:~$ docker network list | grep mysql
 ##### Deploy MySQL
 ```
 # create container
-
+docker run --name mysql-dev0 -v mysql-data:/var/lib/mysql --network="mysql" -e MYSQL_ROOT_PASSWORD=root -d -p 3506:3306 mysql:8.0.38
 
 # restart container
 ubuntu@mini5:~/obrienlabsdev/biometric-backend$ docker start mysql-dev0
