@@ -1,3 +1,7 @@
+# 2025 michael at obrienlabs.cloud
+# https://github.com/ObrienlabsDev/biometric-backend
+# depends on .
+
 apiVersion: v1
 kind: Namespace
 metadata:
