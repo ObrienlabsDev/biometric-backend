@@ -24,6 +24,7 @@ ubuntu@mini5:~$ docker network list | grep mysql
 
 ```
 ##### Create persistent volume
+Volumes in docker are created several ways - here we use the run command with -v - see https://docs.docker.com/engine/storage/volumes/
 ```
 # create volume
 
