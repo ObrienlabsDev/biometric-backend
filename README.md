@@ -7,6 +7,11 @@ Biometric Backend
 ### Deployment
 #### Docker Desktop
 - see https://github.com/ObrienlabsDev/biometric-backend/issues/6
+```
+sudo apt install docker.io
+sudo reboot now
+sudo usermod -aG docker ubuntu
+```
 ##### Create network
 ```
 # create network
