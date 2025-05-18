@@ -368,9 +368,15 @@ Insert again
 ## Building
 ### Generate GCP Credentials
 ```
-gcloud auth application-default login 
+gcloud auth application-default login
 cp ~/.config/gcloud/application_default_credentials.json $TARGET_DIR
 ```
+
+If you encounter warnings about restricted native access when running Maven with Java 21 or newer, create a `.mvn/jvm.config` file containing:
+```
+--enable-native-access=ALL-UNNAMED
+```
+This allows Maven to load the native library used by Jansi without warnings.
 
 
 ## Deployment
