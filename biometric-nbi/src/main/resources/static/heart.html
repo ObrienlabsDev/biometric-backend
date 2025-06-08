@@ -15,6 +15,7 @@
     <script type="text/javascript">
     var reading = 0;
     var map,heatmap;
+	var heatmapData = [];
     var marker;
     var markers = new Array(100);
     var markerPos = 1;
@@ -287,6 +288,7 @@
          //+ "," + result.lattitude + "," + result.longitude + "," + (result.tsStop - result.tsStart) + "");
          
          doTimer(1,500,2);
+		 loadHeatmap(201611185);//result.id);
          //alert(document.getElementById("ident").value);
 
             //document.getElementById("ident_message").innerHTML=' latest';
@@ -295,7 +297,19 @@
        
     }
     
-    
+	function loadHeatmap(userId) {
+	    $.ajax({
+	        url: "coordinates/" + userId,
+	        success: function(result) {
+	            heatmapData = result.map(function(p) {
+	                return new google.maps.LatLng(p.lattitude, p.longitude);
+	            });
+	            if(heatmap) {
+	                heatmap.setData(heatmapData);
+	            }
+	        }
+	    });
+	}
     
     var map, heatmap;
 
@@ -308,7 +322,7 @@
       });
 
       heatmap = new google.maps.visualization.HeatmapLayer({
-        data: getPoints(),
+        data: heatmapData(),
         map: map
       });
     }
@@ -345,8 +359,14 @@
       heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
     }
 
+	
+	// Heatmap data loaded via AJAX
+	function getPoints() {
+	    return heatmapData;
+	}
+	
     // Heatmap data: 500 Points
-    function getPoints() {
+    function getPointsOld() {
       return [ // 4331 points from 201611185 
                // select DISTINCT LATITUDE, LONGITUDE from biometric.gps_record r where r.userId like '201611185'
                 new google.maps.LatLng(45.43404    , -75.692262
