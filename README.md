@@ -52,6 +52,21 @@ Forwarding from 127.0.0.1:3306 -> 3306
 Forwarding from [::1]:3306 -> 3306
 ```
 
+If you prefer direct access without port forwarding, update `mysql-service.yaml`
+to use a `NodePort` service. The example in this repository exposes port `3306`
+on node port `30306`:
+
+```
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 30306
+```
+After applying the updated service you can connect using `<node-ip>:30306`.
+
 ![Image](https://github.com/user-attachments/assets/943d18d8-2cfc-478e-91ed-a7cd7b1dcf23)
 
 #### Docker Desktop
