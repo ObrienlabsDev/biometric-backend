@@ -5,6 +5,61 @@ Biometric Backend
 
 ## Architecture
 ### Deployment
+#### Helm
+#### Kubernetes
+see https://github.com/ObrienlabsDev/biometric-backend/tree/main/biometric-nbi/src/kubernetes
+```
+kubernetes % ./deploy.sh
+(venv-t214) michaelobrien@mbp8 kubernetes % kubectl get pods -n mysql                                    
+NAME                    READY   STATUS    RESTARTS   AGE
+mysql-9fbfc4867-bj4gz   1/1     Running   0          5m39s
+(venv-t214) michaelobrien@mbp8 kubernetes % kubectl get services -n mysql                                
+NAME    TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+mysql   ClusterIP   None         <none>        3306/TCP   31m
+(venv-t214) michaelobrien@mbp8 kubernetes % kubectl exec -it mysql-9fbfc4867-bj4gz -n mysql  -- /bin/bash
+bash-5.1# mysql -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.38 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+bash-5.1# exit
+exit
+(venv-t214) michaelobrien@mbp8 kubernetes % 
+
+```
+
+test outside by port forwarding
+
+```
+(venv-t214) michaelobrien@mbp8 kubernetes % kubectl port-forward mysql-9fbfc4867-bj4gz -n mysql 3306:3306
+Forwarding from 127.0.0.1:3306 -> 3306
+Forwarding from [::1]:3306 -> 3306
+```
+
+![Image](https://github.com/user-attachments/assets/943d18d8-2cfc-478e-91ed-a7cd7b1dcf23)
+
 #### Docker Desktop
 - see https://github.com/ObrienlabsDev/biometric-backend/issues/6
 ```
