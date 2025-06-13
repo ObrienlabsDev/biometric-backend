@@ -18,30 +18,24 @@ NAME    TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
 mysql   ClusterIP   None         <none>        3306/TCP   31m
 (venv-t214) michaelobrien@mbp8 kubernetes % kubectl exec -it mysql-9fbfc4867-bj4gz -n mysql  -- /bin/bash
 bash-5.1# mysql -p
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 10
-Server version: 8.0.38 MySQL Community Server - GPL
 
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> CREATE DATABASE IF NOT EXISTS biometric;
+Query OK, 1 row affected (0.01 sec)
 
 mysql> show databases;
 +--------------------+
 | Database           |
 +--------------------+
+| biometric          |
 | information_schema |
 | mysql              |
 | performance_schema |
 | sys                |
 +--------------------+
-4 rows in set (0.00 sec)
+6 rows in set (0.00 sec)
 
+mysql> use biometric;
+Database changed
 mysql> exit
 Bye
 bash-5.1# exit
