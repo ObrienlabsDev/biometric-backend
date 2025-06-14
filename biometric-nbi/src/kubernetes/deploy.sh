@@ -5,6 +5,11 @@ kubectl apply -f mysql-storage.yaml
 kubectl apply -f mysql-secret.yaml
 kubectl apply -f mysql-deployment.yaml
 kubectl apply -f mysql-service.yaml
+# job to create and populated the database
+kubectl apply -f biometric-nbi-springboot-deployment.yaml
+kubectl apply -f biometric-nbi-springboot-service.yaml
+
+
 
 
 #kubectl get namespaces

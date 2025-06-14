@@ -8,6 +8,9 @@ Biometric Backend
 #### Helm
 #### Kubernetes
 see https://github.com/ObrienlabsDev/biometric-backend/tree/main/biometric-nbi/src/kubernetes
+
+The following script runs both the mysql and biometric-nbi springboot containers
+
 ```
 kubernetes % ./deploy.sh
 (venv-t214) michaelobrien@mbp8 kubernetes % kubectl get pods -n mysql                                    

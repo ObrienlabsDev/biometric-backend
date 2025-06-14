@@ -1,5 +1,7 @@
 #!/bin/bash
 
+kubectl delete -f biometric-nbi-springboot-service.yaml
+kubectl delete -f biometric-nbi-springboot-deployment.yaml
 kubectl delete -f mysql-service.yaml
 kubectl delete -f mysql-deployment.yaml
 kubectl delete -f mysql-secret.yaml
