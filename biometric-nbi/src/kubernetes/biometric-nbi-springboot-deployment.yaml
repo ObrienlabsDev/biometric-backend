@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biometric-nbi
+  labels:
+    app: biometric-nbi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: biometric-nbi
+  template:
+    metadata:
+      labels:
+        app: biometric-nbi
+    spec:
+      containers:
+        - name: biometric-nbi
+          image: obrienlabs/biometric-nbi:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql.mysql.svc.cluster.local:3306/biometric
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: password
