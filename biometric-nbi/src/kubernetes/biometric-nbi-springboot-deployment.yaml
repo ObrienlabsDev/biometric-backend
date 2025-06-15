@@ -15,8 +15,8 @@ spec:
         app: biometric-nbi
     spec:
       containers:
-        - name: biometric-nbi
-          image: obrienlabs/biometric-nbi:latest
+        - name: biometric-nbi # https://hub.docker.com/repository/docker/obrienlabs/biometric-nbi/tags
+          image: obrienlabs/biometric-nbi:0.0.2-arm
           ports:
             - containerPort: 8080
           env:
