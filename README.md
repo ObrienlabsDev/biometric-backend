@@ -2,6 +2,8 @@
 Biometric Backend
 - reference https://github.com/cloud-quickstart/reference-architecture
 - see https://github.com/ObrienlabsDev/doppler-radar-ml/issues
+- see https://github.com/ObrienlabsDev/biometric-backend-grpc-http2
+- see https://github.com/ObrienlabsDev/biometric-backend-mqtt-http3
 
 ## Architecture
 ### Deployment
