@@ -5,6 +5,8 @@ Biometric Backend
 - see https://github.com/ObrienlabsDev/biometric-backend-grpc-http2
 - see https://github.com/ObrienlabsDev/biometric-backend-mqtt-http3
 
+# Links
+- http://local.obrienlabs.io:8889/nbi/api/latest?user=20250921
 ## Architecture
 ### Deployment
 #### Helm
