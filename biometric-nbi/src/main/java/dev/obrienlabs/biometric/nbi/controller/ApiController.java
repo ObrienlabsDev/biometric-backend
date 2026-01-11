@@ -415,7 +415,7 @@ public class ApiController {
 	
 	@GetMapping("/health")
 	@RequestMapping("/health")
-	public String getHealth() {
+	public @ResponseBody String getHealth() {
 		return applicationService.health().toString();
 	}
 }
