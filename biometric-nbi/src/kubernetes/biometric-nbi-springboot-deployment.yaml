@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: biometric-nbi # https://hub.docker.com/repository/docker/obrienlabs/biometric-nbi/tags
-          image: obrienlabs/biometric-nbi:0.0.2-arm
+          image: obrienlabs/biometric-nbi:0.0.2-ia64 # arm
           ports:
             - containerPort: 8080
           env:
@@ -27,3 +27,5 @@ spec:
               value: root
             - name: SPRING_DATASOURCE_PASSWORD
               value: password
+            - name: JAVA_TOOL_OPTIONS # https://github.com/ObrienlabsDev/biometric-backend/issues/46
+              value: "-XX:-UseContainerSupport"
