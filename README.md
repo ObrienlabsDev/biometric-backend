@@ -77,6 +77,11 @@ After applying the updated service you can connect using `<node-ip>:30306`.
 
 ![Image](https://github.com/user-attachments/assets/943d18d8-2cfc-478e-91ed-a7cd7b1dcf23)
 
+remote NodePort connection
+
+<img width="901" height="606" alt="Screenshot 2026-09-07 at 17 54 16" src="https://github.com/user-attachments/assets/aa55fcab-675a-4376-b07b-dc2d3d3f534b" />
+
+
 #### Docker Desktop
 - see https://github.com/ObrienlabsDev/biometric-backend/issues/6
 ```
