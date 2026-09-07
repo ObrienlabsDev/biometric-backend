@@ -14,6 +14,12 @@ Biometric Backend
 #### Kubernetes
 see https://github.com/ObrienlabsDev/biometric-backend/tree/main/biometric-nbi/src/kubernetes
 
+URLS
+- http://192.168.0.203:30888/nbi/swagger-ui.html
+
+<img width="1987" height="714" alt="Screenshot 2026-09-07 at 18 54 47" src="https://github.com/user-attachments/assets/e5a5faf8-8282-45b1-b8d6-bb37f5a0d6a9" />
+
+
 The following script runs both the mysql and biometric-nbi springboot containers
 
 ```
