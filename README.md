@@ -73,7 +73,12 @@ spec:
       targetPort: 3306
       nodePort: 30306
 ```
-After applying the updated service you can connect using `<node-ip>:30306`.
+After applying the updated service you can connect using `<node-ip>:30306` - however try to use the internal dns name (without the internal or external port).
+```
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql.mysql.svc.cluster.local/biometric
+```
 
 ![Image](https://github.com/user-attachments/assets/943d18d8-2cfc-478e-91ed-a7cd7b1dcf23)
 
