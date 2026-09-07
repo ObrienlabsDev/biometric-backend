@@ -22,10 +22,10 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mysql.mysql.svc.cluster.local:3306/biometric
+              value: jdbc:mysql://mysql.mysql.svc.cluster.local/biometric
             - name: SPRING_DATASOURCE_USERNAME
               value: root
             - name: SPRING_DATASOURCE_PASSWORD
-              value: password
+              value: root
             - name: JAVA_TOOL_OPTIONS # https://github.com/ObrienlabsDev/biometric-backend/issues/46
               value: "-XX:-UseContainerSupport"
