@@ -1,0 +1,7 @@
+build-image:
+  stage: build
+  image: docker:27-cli
+  services:
+    - docker:27-dind
+  variables:
+    IMAGE_NAME="biometric-nbi"
